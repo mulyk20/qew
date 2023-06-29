@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Виселица</title>
+  <style>
+    body {
+      text-align: center;
+      font-family: Arial, sans-serif;
+    }
+    #word {
+      margin: 20px;
+      font-size: 24px;
+    }
+    #guessInput {
+      margin: 10px;
+    }
+    #result {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Виселица</h1>
+  <p>Угадай слово, введя по одной букве:</p>
+  <div id="word"></div>
+  <input type="text" id="guessInput">
+  <button onclick="checkLetter()">Проверить</button>
+  <p id="result"></p>
+
+  <script>
+    var word = 'javascript';
+    var guessedWord = Array(word.length).fill('_');
+
+    function updateWordDisplay() {
+      document.getElementById('word').innerHTML = guessedWord.join(' ');
+    }
+
+    function checkLetter() {
+      var letter = document.getElementById('guessInput').value.toLowerCase();
+      var found = false;
+
+      for (var i = 0; i < word.length; i++) {
+        if (word[i] === letter) {
+          guessedWord[i] = letter;
+          found = true;
+        }
+      }
+
+      if (found) {
+        updateWordDisplay();
+
+        if (guessedWord.join('') === word) {
+          document.getElementById('result').innerHTML = 'Поздравляю! Ты угадал слово!';
+        }
+      } else {
+        document.getElementById('result').innerHTML = 'Буква не найдена. Попробуй еще раз.';
+      }
+    }
+
+    updateWordDisplay();
+  </script>
+</body>
+</html>
